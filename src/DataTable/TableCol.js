@@ -56,11 +56,7 @@ const ColumnSortable = styled.div`
   }
 `;
 
-
-const TableCol = memo(({
-  column,
-  sortIcon,
-}) => {
+const TableCol = memo(({ column, sortIcon }) => {
   const { dispatch, pagination, paginationServer, sortColumn, sortDirection } = useTableContext();
   const handleSortChange = () => {
     if (column.sortable) {
@@ -83,17 +79,11 @@ const TableCol = memo(({
   };
 
   const renderNativeSortIcon = sortActive => (
-    <NativeSortIcon
-      column={column}
-      sortActive={sortActive}
-      sortDirection={sortDirection}
-    />
+    <NativeSortIcon column={column} sortActive={sortActive} sortDirection={sortDirection} />
   );
 
   const renderCustomSortIcon = () => (
-    <span className={[sortDirection, '__rdt_custom_sort_icon__'].join(' ')}>
-      {sortIcon}
-    </span>
+    <span className={[sortDirection, '__rdt_custom_sort_icon__'].join(' ')}>{sortIcon}</span>
   );
 
   const sortActive = column.sortable && sortColumn === column.selector;
@@ -118,9 +108,7 @@ const TableCol = memo(({
         >
           {customSortIconRight && renderCustomSortIcon()}
           {nativeSortIconRight && renderNativeSortIcon(sortActive)}
-          <div>
-            {column.name}
-          </div>
+          <div>{`${column.name}Simon`}</div>
           {customSortIconLeft && renderCustomSortIcon()}
           {nativeSortIconLeft && renderNativeSortIcon(sortActive)}
         </ColumnSortable>
@@ -131,10 +119,7 @@ const TableCol = memo(({
 
 TableCol.propTypes = {
   column: PropTypes.object.isRequired,
-  sortIcon: PropTypes.oneOfType([
-    PropTypes.bool,
-    PropTypes.object,
-  ]).isRequired,
+  sortIcon: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]).isRequired,
 };
 
 export default TableCol;
